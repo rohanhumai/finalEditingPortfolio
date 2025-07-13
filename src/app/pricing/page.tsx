@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+// Optional: import ThemeToggle if you use ShadCN theme system
+// import { ThemeToggle } from "@/components/theme-toggle";
 
 function NavLink({ href, label }: { href: string; label: string }) {
   return (
@@ -17,6 +20,8 @@ function NavLink({ href, label }: { href: string; label: string }) {
 }
 
 export default function PricingPage() {
+  const [isOpen, setIsOpen] = useState(false);
+
   const plans = [
     {
       title: "Basic",
@@ -51,8 +56,48 @@ export default function PricingPage() {
         <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-purple-600 rounded-full blur-[100px] opacity-20 animate-pulse" />
       </div>
 
+      {/* 🔹 Navbar */}
+      <nav className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+          <Link
+            href="/"
+            className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent"
+          >
+            NightMare Edits
+          </Link>
+
+          <div className="hidden md:flex items-center gap-6 text-white">
+            <NavLink href="/" label="Home" />
+            <NavLink
+              href="https://www.youtube.com/@nightmareditzz69"
+              label="About"
+            />
+            <NavLink href="/Creations" label="Creations" />
+            {/* <ThemeToggle /> */}
+          </div>
+
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden text-white hover:text-gray-300"
+          >
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+
+        {isOpen && (
+          <div className="md:hidden bg-black/90 px-4 pb-4 flex flex-col gap-3">
+            <NavLink href="/" label="Home" />
+            <NavLink
+              href="https://www.youtube.com/@nightmareditzz69"
+              label="About"
+            />
+            <NavLink href="/Creations" label="Creations" />
+          </div>
+        )}
+      </nav>
+
       {/* 🔹 Hero Section */}
-      <section className="pt-20 pb-8 text-center px-6 md:px-12 max-w-7xl mx-auto">
+      <section className="pt-32 pb-8 text-center px-6 md:px-12 max-w-7xl mx-auto">
         <h1 className="text-4xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-purple-400 to-pink-600 text-transparent bg-clip-text">
           Choose Your Plan
         </h1>
@@ -86,11 +131,9 @@ export default function PricingPage() {
                 <li key={i}>✅ {feature}</li>
               ))}
             </ul>
-            <a href="https://x.com/messages/1696558827959734277-1696558827959734277">
-              <Button className="cursor-pointer w-full bg-white text-black hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 hover:text-white transition-all duration-300 transform hover:scale-105 font-semibold text-base">
-                Book Now
-              </Button>
-            </a>
+            <Button className="w-full bg-white text-black hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 hover:text-white transition-all duration-300 transform hover:scale-105 font-semibold text-base">
+              Book Now
+            </Button>
           </motion.div>
         ))}
       </section>
