@@ -73,9 +73,16 @@ export default function PricingPage() {
                 <li key={i}>✅ {feature}</li>
               ))}
             </ul>
-            <Button className="w-full bg-white text-black hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 hover:text-white transition-all duration-300 transform hover:scale-105 font-semibold text-base">
-              Book Now
-            </Button>
+            <a
+              href="https://x.com/messages/1696558827959734277-1696558827959734277"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <Button className="w-full bg-white text-black hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 hover:text-white transition-all duration-300 transform hover:scale-105 font-semibold text-base">
+                Book Now
+              </Button>
+            </a>
           </motion.div>
         ))}
       </section>
